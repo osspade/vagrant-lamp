@@ -18,7 +18,7 @@ Vagrant.configure("2") do |config|
   # Forward MySql port on 33066, used for connecting admin-clients to localhost:33066
   config.vm.network :forwarded_port, guest: 3306, host: 33066
   # Forward http port on 8080, used for connecting web browsers to localhost:8080
-  config.vm.network :forwarded_port, guest: 80, host: 8080
+  config.vm.network :forwarded_port, guest: 80, host: 8181
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -31,7 +31,7 @@ Vagrant.configure("2") do |config|
   # These expose provider-specific options.
   config.vm.provider :virtualbox do |vb|
     # Use VBoxManage to customize the VM. For example to change memory:
-    vb.customize ["modifyvm", :id, "--memory", "512"]
+    vb.customize ["modifyvm", :id, "--memory", "1024"]
   end
 
   # Enable provisioning with chef solo, specifying a cookbooks path, roles
@@ -44,8 +44,5 @@ Vagrant.configure("2") do |config|
     # List of recipes to run
     chef.add_recipe "vagrant_main"
     chef.add_recipe "vagrant_main::wordpress"
-    chef.add_recipe "vagrant_main::drupal"
-    chef.add_recipe "vagrant_main::magento"
-    chef.add_recipe "vagrant_main::nodejs"
   end
 end
